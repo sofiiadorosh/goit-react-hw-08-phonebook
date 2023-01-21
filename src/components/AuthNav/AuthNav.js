@@ -1,15 +1,16 @@
-import { MdOutlineAppRegistration, MdLogin } from 'react-icons/md';
+import { IoPersonAdd } from 'react-icons/io5';
+import { GoSignIn } from 'react-icons/go';
 import { Nav, StyledLink } from './AuthNav.styled';
 
 export function AuthNav() {
   return (
     <Nav>
       <StyledLink to="/register">
-        <MdOutlineAppRegistration size={24} />
+        <IoPersonAdd size={24} />
         <span>Sign Up</span>
       </StyledLink>
       <StyledLink to="/login">
-        <MdLogin size={24} />
+        <GoSignIn size={24} />
         <span>Sign In</span>
       </StyledLink>
     </Nav>

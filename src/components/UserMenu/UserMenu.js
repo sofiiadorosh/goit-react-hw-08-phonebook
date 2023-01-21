@@ -1,4 +1,4 @@
-import { MdLogout } from 'react-icons/md';
+import { GoSignOut } from 'react-icons/go';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from 'redux/auth/selectors';
 import { logOut } from 'redux/auth/operations';
@@ -12,7 +12,7 @@ export function UserMenu() {
     <Nav>
       <p>Welcome, {user.name}</p>
       <Button type="button" onClick={() => dispatch(logOut())}>
-        <MdLogout size={24} />
+        <GoSignOut size={24} />
         <span>Sign Out</span>
       </Button>
     </Nav>
