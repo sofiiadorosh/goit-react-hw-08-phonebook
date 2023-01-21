@@ -1,4 +1,4 @@
-import { MdOutlineAppRegistration, MdLogout } from 'react-icons/md';
+import { MdOutlineAppRegistration, MdLogin } from 'react-icons/md';
 import { Nav, StyledLink } from './AuthNav.styled';
 
 export function AuthNav() {
@@ -9,7 +9,7 @@ export function AuthNav() {
         <span>Sign Up</span>
       </StyledLink>
       <StyledLink to="/login">
-        <MdLogout size={24} />
+        <MdLogin size={24} />
         <span>Sign In</span>
       </StyledLink>
     </Nav>
