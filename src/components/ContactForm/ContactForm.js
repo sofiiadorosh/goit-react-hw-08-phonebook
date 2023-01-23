@@ -66,6 +66,8 @@ export function ContactForm() {
         /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/,
         'Phone number must be digits'
       )
+      .min(10, 'Must be 10 numbers or more.')
+      .max(12, 'Must be 12 numbers or less.')
       .required('This field is required'),
   });
 

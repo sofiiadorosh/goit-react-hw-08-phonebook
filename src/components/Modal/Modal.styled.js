@@ -15,7 +15,8 @@ const ModalWindow = styled.div`
   top: 50%;
   left: 50%;
 
-  padding: 36px;
+  padding: 24px;
+  width: 90%;
 
   background-color: #e7ecf2;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
@@ -23,6 +24,14 @@ const ModalWindow = styled.div`
   border-radius: 10px;
 
   transform: translate(-50%, -50%) scale(1);
+
+  @media screen and (min-width: 480px) {
+    padding: 36px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 582px;
+  }
 `;
 
 export { Overlay, ModalWindow };

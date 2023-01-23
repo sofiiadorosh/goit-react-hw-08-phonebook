@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFilteredContacts } from 'redux/contacts/selectors';
+import {
+  selectFilteredContacts,
+  selectModalState,
+} from 'redux/contacts/selectors';
 import { fetchContacts } from 'redux/contacts/operations';
 import { Filter } from 'components/Filter';
 import { ContactList } from 'components/ContactList';
@@ -9,11 +12,14 @@ import { Notification } from 'components/Notification';
 
 export default function Contacts() {
   const contacts = useSelector(selectFilteredContacts);
+  const modalState = useSelector(selectModalState);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    if (!modalState) {
+      dispatch(fetchContacts());
+    }
+  }, [dispatch, modalState]);
 
   return (
     <ContactsSection>

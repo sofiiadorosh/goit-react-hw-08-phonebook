@@ -35,12 +35,16 @@ export function EditForm() {
         /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
         'Name may contain only letters, apostrophe, dash and spaces.'
       )
+      .min(4, 'Must be 4 characters or more.')
+      .max(32, 'Must be 32 characters or less.')
       .required('This field is required'),
     number: Yup.string()
       .matches(
         /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/,
         'Phone number must be digits'
       )
+      .min(10, 'Must be 10 numbers or more.')
+      .max(12, 'Must be 12 numbers or less.')
       .required('This field is required'),
   });
 
