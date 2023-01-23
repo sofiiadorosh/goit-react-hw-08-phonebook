@@ -1,8 +1,13 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
+import toast, { Toaster } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts, selectId } from 'redux/contacts/selectors';
+import {
+  selectContacts,
+  selectId,
+  selectError,
+} from 'redux/contacts/selectors';
 import { setModal } from 'redux/modal/slice';
 import { editContact } from 'redux/contacts/operations';
 import {
@@ -17,12 +22,41 @@ import {
 export function EditForm() {
   const contacts = useSelector(selectContacts);
   const contactId = useSelector(selectId);
+  const error = useSelector(selectError);
   const dispatch = useDispatch();
   const nameId = nanoid();
   const numberId = nanoid();
 
   const contactInformation = contacts.find(({ id }) => id === contactId);
   const { id, name, number } = contactInformation;
+
+  const informAboutEditing = () => {
+    if (error) {
+      toast.error(error, {
+        style: {
+          border: '1px solid #e1503d',
+          boxShadow: 'none',
+          fontSize: '16px',
+        },
+        iconTheme: {
+          primary: '#e1503d',
+          secondary: '#fefefe',
+        },
+      });
+    } else {
+      toast.success('The contact was successfully updated.', {
+        style: {
+          border: '1px solid #1d976c',
+          boxShadow: 'none',
+          fontSize: '16px',
+        },
+        iconTheme: {
+          primary: '#1d976c',
+          secondary: '#fefefe',
+        },
+      });
+    }
+  };
 
   const initialValues = {
     name: name,
@@ -51,6 +85,7 @@ export function EditForm() {
   const handleSubmit = values => {
     dispatch(editContact({ id, contact: values }));
     dispatch(setModal());
+    informAboutEditing();
   };
 
   return (
@@ -60,6 +95,7 @@ export function EditForm() {
       onSubmit={handleSubmit}
     >
       <EditContactForm autoComplete="off">
+        <Toaster position="top-right" reverseOrder={false} />
         <FormControls>
           <Input
             id={nameId}
