@@ -66,7 +66,9 @@ const contactsSlice = createSlice({
         return {
           ...state,
           items: state.items.map(contact =>
-            contact.id === action.payload.id ? action.payload : contact
+            contact.id === action.payload.id
+              ? { ...contact, ...action.payload.contact }
+              : contact
           ),
           isLoading: false,
           error: null,

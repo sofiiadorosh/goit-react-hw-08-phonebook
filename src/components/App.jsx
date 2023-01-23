@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+import PulseLoader from 'react-spinners/PulseLoader';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { useEffect, lazy } from 'react';
@@ -14,6 +15,10 @@ const Login = lazy(() => import('../pages/Login'));
 const Contacts = lazy(() => import('../pages/Contacts'));
 const AddContact = lazy(() => import('../pages/AddContact'));
 
+const override = {
+  textAlign: 'center',
+};
+
 export const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
   const dispatch = useDispatch();
@@ -23,7 +28,15 @@ export const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <p>Refreshing user...</p>
+    <>
+      <PulseLoader
+        color="#000000"
+        cssOverride={override}
+        size={15}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    </>
   ) : (
     <div>
       <GlobalStyle />

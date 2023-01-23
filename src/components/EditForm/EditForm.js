@@ -45,9 +45,7 @@ export function EditForm() {
   });
 
   const handleSubmit = values => {
-    dispatch(
-      editContact({ id, contact: { ...contactInformation, ...values } })
-    );
+    dispatch(editContact({ id, contact: values }));
     dispatch(setModal());
   };
 

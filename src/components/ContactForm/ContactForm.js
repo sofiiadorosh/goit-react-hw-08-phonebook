@@ -2,10 +2,9 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
 import toast, { Toaster } from 'react-hot-toast';
-import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/contacts/operations';
-import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
+import { selectContacts, selectError } from 'redux/contacts/selectors';
 import {
   AddContactForm,
   FormControls,
@@ -17,14 +16,26 @@ import {
 
 export function ContactForm() {
   const contacts = useSelector(selectContacts);
-  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
   const dispatch = useDispatch();
   const nameId = nanoid();
   const numberId = nanoid();
 
-  useEffect(() => {
-    if (isLoading) {
-      toast.success('Contact was added!', {
+  const informAboutAdding = () => {
+    if (error) {
+      toast.error(error, {
+        style: {
+          border: '1px solid #e1503d',
+          boxShadow: 'none',
+          fontSize: '16px',
+        },
+        iconTheme: {
+          primary: '#e1503d',
+          secondary: '#fefefe',
+        },
+      });
+    } else {
+      toast.success('The contact was successfully added.', {
         style: {
           border: '1px solid #1d976c',
           boxShadow: 'none',
@@ -36,7 +47,7 @@ export function ContactForm() {
         },
       });
     }
-  }, [isLoading]);
+  };
 
   const initialValues = {
     name: '',
@@ -70,6 +81,7 @@ export function ContactForm() {
     }
     dispatch(addContact(values));
     resetForm();
+    informAboutAdding();
   };
 
   return (
