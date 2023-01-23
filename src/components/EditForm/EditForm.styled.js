@@ -1,7 +1,7 @@
 import { Form, Field, ErrorMessage } from 'formik';
 import styled from 'styled-components';
 
-const SignUpForm = styled(Form)`
+const EditContactForm = styled(Form)`
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -122,4 +122,4 @@ const Button = styled.button`
   }
 `;
 
-export { SignUpForm, FormControls, Input, Label, Error, Button };
+export { EditContactForm, FormControls, Input, Label, Error, Button };

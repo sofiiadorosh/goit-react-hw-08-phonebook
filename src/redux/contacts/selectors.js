@@ -8,6 +8,10 @@ const selectError = state => state.contacts.error;
 
 const selectFilter = state => state.filter;
 
+const selectModalState = state => state.modal.isModalOpened;
+
+const selectId = state => state.modal.id;
+
 const selectFilteredContacts = createSelector(
   [selectContacts, selectFilter],
   (contacts, filter) => {
@@ -22,5 +26,7 @@ export {
   selectIsLoading,
   selectError,
   selectFilter,
+  selectModalState,
+  selectId,
   selectFilteredContacts,
 };

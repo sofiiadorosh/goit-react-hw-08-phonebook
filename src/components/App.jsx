@@ -1,16 +1,30 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
+import { useEffect, lazy } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectIsRefreshing } from 'redux/auth/selectors';
+import { refreshUser } from 'redux/auth/operations';
 import { Layout } from './Layout';
-import { Home } from 'pages/Home';
-import { Register } from 'pages/Register';
-import { Login } from 'pages/Login';
-import { Contacts } from 'pages/Contacts';
-import { AddContact } from 'pages/AddContact';
 import { GlobalStyle } from './GlobalStyled';
 
+const Home = lazy(() => import('../pages/Home'));
+const Register = lazy(() => import('../pages/Register'));
+const Login = lazy(() => import('../pages/Login'));
+const Contacts = lazy(() => import('../pages/Contacts'));
+const AddContact = lazy(() => import('../pages/AddContact'));
+
 export const App = () => {
-  return (
+  const isRefreshing = useSelector(selectIsRefreshing);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <p>Refreshing user...</p>
+  ) : (
     <div>
       <GlobalStyle />
       <Routes>

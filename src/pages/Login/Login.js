@@ -1,7 +1,7 @@
 import { LoginForm } from 'components/LoginForm';
 import { SignInSection, Container } from './Login.styled';
 
-export function Login() {
+export default function Login() {
   return (
     <SignInSection>
       <Container>

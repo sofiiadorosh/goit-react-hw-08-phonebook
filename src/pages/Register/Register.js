@@ -1,7 +1,7 @@
 import { RegisterForm } from 'components/RegisterForm';
 import { SignUpSection, Container } from './Register.styled';
 
-export function Register() {
+export default function Register() {
   return (
     <SignUpSection>
       <Container>

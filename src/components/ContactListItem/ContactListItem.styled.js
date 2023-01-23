@@ -14,12 +14,11 @@ const Contact = styled.li`
 
   cursor: pointer;
 
-  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover,
   &:focus {
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
-      1px 4px 6px rgba(0, 0, 0, 0.16);
+    border-color: #010101;
   }
 `;
 
@@ -28,6 +27,10 @@ const ContactWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
+
+  @media screen and (max-width: 479px) {
+    font-size: 16px;
+  }
 
   p {
     display: flex;
@@ -40,13 +43,20 @@ const ContactWrapper = styled.div`
   }
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+`;
+
 const Button = styled.button`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  gap: 4px;
 
-  min-width: 100px;
-  height: 40px;
+  padding: 8px;
 
   font-size: 16px;
   letter-spacing: 1px;
@@ -70,10 +80,32 @@ const Button = styled.button`
     border-color: #e1503d;
   }
 
+  :first-child {
+    &:hover,
+    &:focus {
+      color: #fefefe;
+      background-color: #2196f3;
+      border-color: #2196f3;
+    }
+  }
+
   &:disabled {
     background-color: #e2e2e2;
     color: #636363;
   }
+
+  @media screen and (min-width: 480px) {
+    min-width: 100px;
+    height: 40px;
+  }
+
+  span {
+    display: none;
+
+    @media screen and (min-width: 480px) {
+      display: inline-flex;
+    }
+  }
 `;
 
-export { Contact, ContactWrapper, Button };
+export { Contact, ContactWrapper, ButtonWrapper, Button };

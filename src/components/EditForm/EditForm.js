@@ -1,46 +1,32 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
-import toast, { Toaster } from 'react-hot-toast';
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'redux/contacts/operations';
-import { selectContacts, selectIsLoading } from 'redux/contacts/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectContacts, selectId } from 'redux/contacts/selectors';
+import { setModal } from 'redux/modal/slice';
+import { editContact } from 'redux/contacts/operations';
 import {
-  AddContactForm,
+  EditContactForm,
   FormControls,
   Input,
   Label,
   Error,
   Button,
-} from './ContactForm.styled';
+} from './EditForm.styled';
 
-export function ContactForm() {
+export function EditForm() {
   const contacts = useSelector(selectContacts);
-  const isLoading = useSelector(selectIsLoading);
+  const contactId = useSelector(selectId);
   const dispatch = useDispatch();
   const nameId = nanoid();
   const numberId = nanoid();
 
-  useEffect(() => {
-    if (isLoading) {
-      toast.success('Contact was added!', {
-        style: {
-          border: '1px solid #1d976c',
-          boxShadow: 'none',
-          fontSize: '16px',
-        },
-        iconTheme: {
-          primary: '#1d976c',
-          secondary: '#fefefe',
-        },
-      });
-    }
-  }, [isLoading]);
+  const contactInformation = contacts.find(({ id }) => id === contactId);
+  const { id, name, number } = contactInformation;
 
   const initialValues = {
-    name: '',
-    number: '',
+    name: name,
+    number: number,
   };
 
   const validationSchema = Yup.object({
@@ -58,18 +44,11 @@ export function ContactForm() {
       .required('This field is required'),
   });
 
-  const handleSubmit = (values, { resetForm }) => {
-    if (
-      contacts.find(
-        ({ name }) => name.toLowerCase() === values.name.trim().toLowerCase()
-      )
-    ) {
-      alert(`${values.name} is already in your contacts.`);
-      resetForm();
-      return;
-    }
-    dispatch(addContact(values));
-    resetForm();
+  const handleSubmit = values => {
+    dispatch(
+      editContact({ id, contact: { ...contactInformation, ...values } })
+    );
+    dispatch(setModal());
   };
 
   return (
@@ -78,8 +57,7 @@ export function ContactForm() {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      <AddContactForm autoComplete="off">
-        <Toaster position="top-right" reverseOrder={false} />
+      <EditContactForm autoComplete="off">
         <FormControls>
           <Input
             id={nameId}
@@ -87,6 +65,7 @@ export function ContactForm() {
             name="name"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             placeholder=" "
+            autoFocus
           />
           <Label htmlFor={nameId}>Name</Label>
           <Error component="div" name="name" />
@@ -102,8 +81,8 @@ export function ContactForm() {
           <Label htmlFor={numberId}>Number</Label>
           <Error component="div" name="number" />
         </FormControls>
-        <Button type="submit">Add contact</Button>
-      </AddContactForm>
+        <Button type="submit">Save changes</Button>
+      </EditContactForm>
     </Formik>
   );
 }
