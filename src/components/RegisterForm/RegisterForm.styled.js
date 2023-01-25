@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const SignUpForm = styled(Form)`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 
-  padding: 20px;
+  padding: 36px 24px;
   margin: 0 auto;
 
   width: 99%;
@@ -17,12 +17,18 @@ const SignUpForm = styled(Form)`
   border-radius: 15px;
 
   @media screen and (min-width: 768px) {
-    width: 510px;
+    width: 610px;
   }
 `;
 
 const FormControls = styled.div`
   position: relative;
+`;
+
+const Title = styled.div`
+  margin-bottom: 12px;
+  padding-left: 4px;
+  font-size: 12px;
 `;
 
 const Input = styled(Field)`
@@ -122,4 +128,4 @@ const Button = styled.button`
   }
 `;
 
-export { SignUpForm, FormControls, Input, Label, Error, Button };
+export { SignUpForm, FormControls, Title, Input, Label, Error, Button };

@@ -21,7 +21,7 @@ export function ContactListItem({ contact: { id, name, number } }) {
 
   const informAboutDeleting = () => {
     if (error) {
-      toast.error(error, {
+      toast.error('Something went wrong, try again later.', {
         style: {
           border: '1px solid #e1503d',
           boxShadow: 'none',

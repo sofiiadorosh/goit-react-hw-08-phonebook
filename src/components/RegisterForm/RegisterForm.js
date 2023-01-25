@@ -7,6 +7,7 @@ import { register } from 'redux/auth/operations';
 import {
   SignUpForm,
   FormControls,
+  Title,
   Input,
   Label,
   Error,
@@ -58,26 +59,47 @@ export function RegisterForm() {
       onSubmit={handleSubmit}
     >
       <SignUpForm autoComplete="off">
-        <FormControls>
-          <Input id={nameId} type="text" name="name" placeholder=" " />
-          <Label htmlFor={nameId}>Name</Label>
-          <Error component="div" name="name" />
-        </FormControls>
-        <FormControls>
-          <Input id={emailId} type="email" name="email" placeholder=" " />
-          <Label htmlFor={emailId}>E-mail</Label>
-          <Error component="div" name="email" />
-        </FormControls>
-        <FormControls>
-          <Input
-            id={passwordId}
-            type="password"
-            name="password"
-            placeholder=" "
-          />
-          <Label htmlFor={passwordId}>Password</Label>
-          <Error component="div" name="password" />
-        </FormControls>
+        <div>
+          <Title>
+            Name may contain only letters, apostrophe, dash and spaces, between
+            4 and 32 characters.
+          </Title>
+          <FormControls>
+            <Input
+              id={nameId}
+              type="text"
+              name="name"
+              placeholder=" "
+              title="Name may contain only letters, apostrophe, dash and spaces, between 4 and 32 characters."
+            />
+            <Label htmlFor={nameId}>Name</Label>
+            <Error component="div" name="name" />
+          </FormControls>
+        </div>
+        <div>
+          <Title>E-mail must contain @ symbol.</Title>
+          <FormControls>
+            <Input id={emailId} type="email" name="email" placeholder=" " />
+            <Label htmlFor={emailId}>E-mail</Label>
+            <Error component="div" name="email" />
+          </FormControls>
+        </div>
+        <div>
+          <Title>
+            Password must contain at least 1 uppercase letter, 6 lowercase
+            letters, one number and one symbol.
+          </Title>
+          <FormControls>
+            <Input
+              id={passwordId}
+              type="password"
+              name="password"
+              placeholder=" "
+            />
+            <Label htmlFor={passwordId}>Password</Label>
+            <Error component="div" name="password" />
+          </FormControls>
+        </div>
         <Button type="submit">Sign Up</Button>
       </SignUpForm>
     </Formik>

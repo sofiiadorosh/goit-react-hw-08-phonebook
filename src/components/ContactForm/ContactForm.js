@@ -23,7 +23,7 @@ export function ContactForm() {
 
   const informAboutAdding = () => {
     if (error) {
-      toast.error(error, {
+      toast.error('Something went wrong, try again later.', {
         style: {
           border: '1px solid #e1503d',
           boxShadow: 'none',
