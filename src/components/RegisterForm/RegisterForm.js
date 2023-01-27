@@ -1,6 +1,5 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import YupPassword from 'yup-password';
 import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
@@ -12,7 +11,6 @@ import {
   Error,
   Button,
 } from './RegisterForm.styled';
-YupPassword(Yup);
 
 export function RegisterForm() {
   const dispatch = useDispatch();
