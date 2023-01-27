@@ -55,20 +55,8 @@ export function ContactForm() {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string()
-      .matches(
-        /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-        'Name may contain only letters, apostrophe, dash and spaces.'
-      )
-      .required('This field is required'),
-    number: Yup.string()
-      .matches(
-        /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/,
-        'Phone number must be digits'
-      )
-      .min(10, 'Must be 10 numbers or more.')
-      .max(12, 'Must be 12 numbers or less.')
-      .required('This field is required'),
+    name: Yup.string().required('This field is required'),
+    number: Yup.string().required('This field is required'),
   });
 
   const handleSubmit = (values, { resetForm }) => {
@@ -99,6 +87,7 @@ export function ContactForm() {
             id={nameId}
             type="text"
             name="name"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             placeholder=" "
           />
@@ -110,6 +99,7 @@ export function ContactForm() {
             id={numberId}
             type="tel"
             name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             placeholder=" "
           />

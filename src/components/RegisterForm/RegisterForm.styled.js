@@ -25,12 +25,6 @@ const FormControls = styled.div`
   position: relative;
 `;
 
-const Title = styled.div`
-  margin-bottom: 12px;
-  padding-left: 4px;
-  font-size: 12px;
-`;
-
 const Input = styled(Field)`
   width: 100%;
   height: 50px;
@@ -128,4 +122,4 @@ const Button = styled.button`
   }
 `;
 
-export { SignUpForm, FormControls, Title, Input, Label, Error, Button };
+export { SignUpForm, FormControls, Input, Label, Error, Button };

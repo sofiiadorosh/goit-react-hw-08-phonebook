@@ -36,8 +36,6 @@ const ContactWrapper = styled.div`
 
   border-radius: 15px;
 
-  text-align: center;
-
   @media screen and (min-width: 768px) {
     width: 510px;
   }

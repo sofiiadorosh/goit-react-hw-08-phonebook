@@ -7,7 +7,6 @@ import { register } from 'redux/auth/operations';
 import {
   SignUpForm,
   FormControls,
-  Title,
   Input,
   Label,
   Error,
@@ -28,23 +27,11 @@ export function RegisterForm() {
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string()
-      .matches(
-        /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-        'Name may contain only letters, apostrophe, dash and spaces.'
-      )
-      .min(4, 'Must be 4 characters or more.')
-      .max(32, 'Must be 32 characters or less.')
-      .required('This field is required.'),
+    name: Yup.string().required('This field is required.'),
     email: Yup.string()
       .email('Invalid e-mail address.')
       .required('This field is required.'),
-    password: Yup.string()
-      .minUppercase(1, 'Password must contain at least 1 uppercase letter.')
-      .minLowercase(6, 'Password must contain at least 6 lowercase letters.')
-      .minNumbers(1, 'Password must contain at least 1 number.')
-      .minSymbols(1, 'Password must contain at least 1 symbol.')
-      .required('This field is required.'),
+    password: Yup.string().required('This field is required.'),
   });
 
   const handleSubmit = (values, { resetForm }) => {
@@ -59,47 +46,32 @@ export function RegisterForm() {
       onSubmit={handleSubmit}
     >
       <SignUpForm autoComplete="off">
-        <div>
-          <Title>
-            Name may contain only letters, apostrophe, dash and spaces, between
-            4 and 32 characters.
-          </Title>
-          <FormControls>
-            <Input
-              id={nameId}
-              type="text"
-              name="name"
-              placeholder=" "
-              title="Name may contain only letters, apostrophe, dash and spaces, between 4 and 32 characters."
-            />
-            <Label htmlFor={nameId}>Name</Label>
-            <Error component="div" name="name" />
-          </FormControls>
-        </div>
-        <div>
-          <Title>E-mail must contain @ symbol.</Title>
-          <FormControls>
-            <Input id={emailId} type="email" name="email" placeholder=" " />
-            <Label htmlFor={emailId}>E-mail</Label>
-            <Error component="div" name="email" />
-          </FormControls>
-        </div>
-        <div>
-          <Title>
-            Password must contain at least 1 uppercase letter, 6 lowercase
-            letters, one number and one symbol.
-          </Title>
-          <FormControls>
-            <Input
-              id={passwordId}
-              type="password"
-              name="password"
-              placeholder=" "
-            />
-            <Label htmlFor={passwordId}>Password</Label>
-            <Error component="div" name="password" />
-          </FormControls>
-        </div>
+        <FormControls>
+          <Input
+            id={nameId}
+            type="text"
+            name="name"
+            placeholder=" "
+            title="Name may contain only letters, apostrophe, dash and spaces, between 4 and 32 characters."
+          />
+          <Label htmlFor={nameId}>Name</Label>
+          <Error component="div" name="name" />
+        </FormControls>
+        <FormControls>
+          <Input id={emailId} type="email" name="email" placeholder=" " />
+          <Label htmlFor={emailId}>E-mail</Label>
+          <Error component="div" name="email" />
+        </FormControls>
+        <FormControls>
+          <Input
+            id={passwordId}
+            type="password"
+            name="password"
+            placeholder=" "
+          />
+          <Label htmlFor={passwordId}>Password</Label>
+          <Error component="div" name="password" />
+        </FormControls>
         <Button type="submit">Sign Up</Button>
       </SignUpForm>
     </Formik>
